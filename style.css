@@ -5,10 +5,22 @@
 }
 
 body {
+  color: white;
+  font-family: 'Lato', sans-serif;
   height: 100vh;
   position: relative;
-
 }
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.right {
+  float: right;
+}
+
 
 .top {
   height: 40vh;
@@ -16,4 +28,75 @@ body {
   background-size: cover;
   background-position: center;
   position: relative;
+}
+
+/* Budget Area */
+
+.budget {
+  position: absolute;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+
+}
+.budget-title {
+  font-size: 25px;
+  /* margin-bottom: 10px;
+  /* font-weight: 300; */ */
+  text-align: center;
+}
+
+.budget-total {
+  font-weight: 300;
+  font-size: 46px;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.budget-income,
+.budget-expenses {
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.budget-income {
+    margin-bottom: 10px;
+    background-color: #259c17;
+}
+
+.budget-expenses {
+    background-color: #d10808;
+}
+
+.budget-income-text,
+.budget-expenses-text {
+    float: left;
+    font-size: 14px;
+    color: white;
+    margin-top: 2px;
+}
+
+.budget-income-value,
+.budget-expenses-value {
+    letter-spacing: 1px;
+    float: left;
+}
+
+.budget-income-percentage,
+.budget-expenses-percentage {
+    float: left;
+    width: 34px;
+    font-size: 11px;
+    padding: 3px 0;
+    margin-left: 10px;
+}
+
+.budget-expenses-percentage,
+.budget-income-percentage {
+    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    border-radius: 3px;
 }
