@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="style.css">
         <title>Budget App</title>
@@ -33,11 +36,12 @@
         <div class="budget-form-container">
           <div class="budget-form">
             <select class="dropdown" name="">
-
+              <option value="plus" selected>+</option>
+              <option value="minus">-</option>
             </select>
             <input type="text" name="" value="">
-            <input type="number" name="" value="">
-            <button type="form-btn" name="button"></button>
+            <input type="number" name="" value="" placeholder="Value">
+            <button type="form-btn" class="mdc-button" name="button"><i class="material-icons">add_circle_outline</i></button>
           </div>
 
         </div>
