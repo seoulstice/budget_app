@@ -68,7 +68,11 @@ var budgetController = (function() {
             data.budget = data.total.income - data.total.expense;
 
             // Calculate the percentage of income spent on expenses
-            data.percentage = Math.round((data.total.expense / data.total.income) * 100);
+            if (data.total.income > 0) {
+                data.percentage = Math.round((data.total.expense / data.total.income) * 100);
+            } else {
+                data.percentage = -1;
+            }
         },
 
         getBudget: function() {
@@ -95,8 +99,11 @@ var uiController = (function() {
         inputValue:         '.add-value',
         inputBtn:           '.add-btn',
         incomeContainer:    '.income-list',
-        expensesContainer:  '.expenses-list'
-
+        expensesContainer:  '.expenses-list',
+        budgetTotal:        '.budget-total',
+        budgetIncVal:       '.budget-income-value',
+        budgetExpVal:       '.budget-expenses-value',
+        budgetExpPerc:      '.budget-expenses-percentage'
     };
 
     return {
@@ -119,7 +126,7 @@ var uiController = (function() {
             } else if (type === 'expense') {
                 element = domStrings.expensesContainer;
 
-                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class=""><div class="item-value">%value%</div><div class="item-percentage">21%</div><div class="item-delete"><button class="item-delete-btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class=""><div class="item-value">%value%</div><div class="item-percentage">21%</div><div class="item-delete"><button class="item-delete-btn">Delete</button></div></div></div>'
             }
             // Replace the placeholder text with actual data
             newHtml = html.replace('%id%', obj.id);
@@ -147,6 +154,18 @@ var uiController = (function() {
             });
 
             fieldsArray[0].focus();
+        },
+
+        updateUi: function(data) {
+            document.querySelector(domStrings.budgetTotal).textContent = data.budget;
+            document.querySelector(domStrings.budgetIncVal).textContent = data.totalIncome;
+            document.querySelector(domStrings.budgetExpVal).textContent = data.totalExpenses;
+
+            if (data.percentage > 0) {
+                document.querySelector(domStrings.budgetExpPerc).textContent = data.percentage + '%';
+            } else {
+                document.querySelector(domStrings.budgetExpPerc).textContent = '---'
+            }
         }
     };
 
@@ -175,7 +194,7 @@ var appController = (function(budgetCtrl, uiCtrl) {
         var budget = budgetCtrl.getBudget();
 
         // Display budget on UI
-        console.log(budget);
+        uiCtrl.updateUi(budget);
     };
 
     var ctrlAddItem = function() {
@@ -202,6 +221,12 @@ var appController = (function(budgetCtrl, uiCtrl) {
     return {
         init: function() {
             initializeEventListeners();
+            uiCtrl.updateUi({
+                totalIncome: 0,
+                totalExpenses: 0,
+                budget: 0,
+                percentage: -1
+            });
         }
     }
 
