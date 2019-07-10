@@ -12,6 +12,10 @@ body {
   position: relative;
 }
 
+.bottom {
+    color: black;
+}
+
 .clearfix::after {
     content: "";
     display: table;

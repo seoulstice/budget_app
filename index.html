@@ -36,17 +36,28 @@
         <div class="budget-form-container">
           <div class="budget-form">
             <select class="dropdown" name="">
-              <option value="plus" selected>+</option>
-              <option value="minus">-</option>
+              <option value="income" selected>+</option>
+              <option value="expense">-</option>
             </select>
-            <input type="text" name="" value="Description">
-            <input type="number" name="" value="" placeholder="Value">
-            <button type="form-btn" class="mdc-button" name="button"><i class="material-icons">add_circle_outline</i></button>
+            <input type="text" class="add-description" name="" value="" placeholder="Description">
+            <input type="number" class="add-value" name="" value="" placeholder="Value" min="0">
+            <button type="form-btn" class="mdc-button add-btn" name="button"><i class="material-icons">add_circle_outline</i></button>
           </div>
 
         </div>
         <div class="container">
+            <div class="income">
+                <h2 class="income-title">Income</h2>
+                <div class="income-list">
 
+                </div>
+            </div>
+            <div class="expenses">
+                <h2 class="expenses-title">Expenses</h2>
+                <div class="expenses-list">
+
+                </div>
+            </div>
         </div>
 
       </div>
