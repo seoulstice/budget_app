@@ -167,6 +167,12 @@ var uiController = (function() {
         return (type === 'expense' ? sign = '-' : sign = '+') + ' ' + int + '.' + dec;
     };
 
+    var nodeListForEach = function(list, callback) {
+        for (var i = 0; i < list.length; i++) {
+            callback(list[i], i);
+        }
+    };
+
     return {
         getInput: function(){
             return {
@@ -209,12 +215,6 @@ var uiController = (function() {
 
         displayPercentages: function(percentages) {
             var fields = document.querySelectorAll(domStrings.expPercentage);
-
-            var nodeListForEach = function(list, callback) {
-                for (var i = 0; i < list.length; i++) {
-                    callback(list[i], i);
-                }
-            };
 
             nodeListForEach(fields, function(current, index) {
                 if (percentages[index] > 0) {
@@ -264,6 +264,19 @@ var uiController = (function() {
             } else {
                 document.querySelector(domStrings.budgetExpPerc).textContent = '---'
             }
+        },
+
+        changeType: function() {
+            var fields;
+
+            fields = document.querySelectorAll(domStrings.inputType + ',' + domStrings.inputDescription + ',' + domStrings.inputValue);
+
+            nodeListForEach(fields, function(element) {
+                element.classList.toggle('red-focus');
+            });
+
+            // need to change later to use with materialize icon document.querySelector(domStrings.inputBtn).classList.toggle('red');
+
         }
     };
 
@@ -283,7 +296,8 @@ var appController = (function(budgetCtrl, uiCtrl) {
             }
         });
 
-        document.querySelector(domStrings.container).addEventListener('click', ctrlDeleteItem)
+        document.querySelector(domStrings.container).addEventListener('click', ctrlDeleteItem);
+        document.querySelector(domStrings.inputType).addEventListener('change', uiCtrl.changeType);
     };
 
     var updateBudget = function() {

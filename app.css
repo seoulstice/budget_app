@@ -26,6 +26,14 @@ body {
   float: right;
 }
 
+.red {
+    color: red !imp
+}
+
+.red-focus:focus {
+    border: 1px solid #d10808 !important;
+}
+
 
 .top {
   height: 40vh;
@@ -104,4 +112,11 @@ body {
     background-color: rgba(255, 255, 255, 0.3);
     text-align: center;
     border-radius: 3px;
+}
+
+.dropdown:focus,
+.add-description:focus,
+.add-value:focus {
+    outline: none;
+    border: 1px solid #259c17;
 }
