@@ -1,6 +1,6 @@
-var budgetController = (function() {
+let budgetController = (() => {
 
-    var Expense = function(id, description, value) {
+    let Expense = function(id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
@@ -19,13 +19,13 @@ var budgetController = (function() {
         return this.percentage;
     }
 
-    var Income = function(id, description, value) {
+    let Income = function(id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
     };
 
-    var data = {
+    let data = {
         allItems: {
             expense: [],
             income: []
@@ -38,18 +38,17 @@ var budgetController = (function() {
         percentage: -1
     };
 
-    var calcTotal = function(type) {
-        var sum = 0;
-        data.allItems[type].forEach(function(element) {
+    let calcTotal = (type) => {
+        let sum = 0;
+        data.allItems[type].forEach((element) => {
             sum += element.value;
         });
         data.total[type] = sum;
     };
 
     return {
-        addItem: function(type, des, val) {
-            // Create undefined variables
-            var newItem, ID;
+        addItem: (type, des, val) => {
+            let newItem, ID;
 
             // Create a new ID
             if (data.allItems[type].length > 0) {
@@ -72,10 +71,10 @@ var budgetController = (function() {
             return newItem;
         },
 
-        deleteItem: function(type, id) {
-            var ids, index;
+        deleteItem: (type, id) => {
+            let ids, index;
 
-            ids = data.allItems[type].map( function(element) {
+            ids = data.allItems[type].map((element) => {
                 return element.id;
             });
 
@@ -86,7 +85,7 @@ var budgetController = (function() {
             };
         },
 
-        calcBudget: function() {
+        calcBudget: () => {
             // Calculate Total Income and Expenses
             calcTotal('expense');
             calcTotal('income');
@@ -102,20 +101,20 @@ var budgetController = (function() {
             }
         },
 
-        calcPercentages: function() {
-            data.allItems.expense.forEach(function(element) {
+        calcPercentages: () => {
+            data.allItems.expense.forEach((element) => {
                 element.calcPercentage(data.total.income);
             });
         },
 
-        getPercentages: function() {
-            var allPercentages = data.allItems.expense.map(function(element) {
+        getPercentages: () => {
+            let allPercentages = data.allItems.expense.map((element) => {
                 return element.getPercentage();
             });
             return allPercentages;
         },
 
-        getBudget: function() {
+        getBudget: () => {
             return {
                 totalIncome: data.total.income,
                 totalExpenses: data.total.expense,
@@ -124,16 +123,16 @@ var budgetController = (function() {
             }
         },
 
-        testing: function() {
+        testing: () => {
             console.log(data);
         }
     }
 })();
 
 
-var uiController = (function() {
+let uiController = (() => {
 
-    var domStrings = {
+    let domStrings = {
         inputType:          '.dropdown',
         inputDescription:   '.add-description',
         inputValue:         '.add-value',
@@ -149,8 +148,8 @@ var uiController = (function() {
         date:               '.budget-title-month'
     };
 
-    var formatNumber = function(num, type) {
-        var int, dec, numSplit;
+    let formatNumber = (num, type) => {
+        let int, dec, numSplit;
 
         num = Math.abs(num);
         num = num.toFixed(2);
@@ -167,14 +166,14 @@ var uiController = (function() {
         return (type === 'expense' ? sign = '-' : sign = '+') + ' ' + int + '.' + dec;
     };
 
-    var nodeListForEach = function(list, callback) {
-        for (var i = 0; i < list.length; i++) {
+    let nodeListForEach = (list, callback) => {
+        for (let i = 0; i < list.length; i++) {
             callback(list[i], i);
         }
     };
 
     return {
-        getInput: function(){
+        getInput: () => {
             return {
                 type:        document.querySelector(domStrings.inputType).value,
                 description: document.querySelector(domStrings.inputDescription).value,
@@ -182,8 +181,8 @@ var uiController = (function() {
             };
         },
 
-        addListItem: function(obj, type) {
-            var html, newHtml;
+        addListItem: (obj, type) => {
+            let html, newHtml;
             // Create html string with placeholder tags
             if (type === 'income') {
 
@@ -202,21 +201,19 @@ var uiController = (function() {
 
             // Insert the html into the DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml)
-
-
         },
 
-        deleteListItem: function(itemID) {
-            var element;
+        deleteListItem: (itemID) => {
+            let element;
 
             element = document.getElementById(itemID);
             element.parentNode.removeChild(element);
         },
 
         displayPercentages: function(percentages) {
-            var fields = document.querySelectorAll(domStrings.expPercentage);
+            let fields = document.querySelectorAll(domStrings.expPercentage);
 
-            nodeListForEach(fields, function(current, index) {
+            nodeListForEach(fields, (current, index) => {
                 if (percentages[index] > 0) {
                     current.textContent = percentages[index] + '%';
                 } else {
@@ -225,8 +222,8 @@ var uiController = (function() {
             });
         },
 
-        displayDate : function() {
-            var today, year, month, months;
+        displayDate : () => {
+            let today, year, month, months;
             today = new Date();
             month = today.getMonth();
             months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -234,25 +231,25 @@ var uiController = (function() {
             document.querySelector(domStrings.date).textContent = months[month] + ' ' + year;
         },
 
-        getDomStrings: function() {
+        getDomStrings: () => {
             return domStrings;
         },
 
-        clearFields: function() {
-            var fields, fieldsArray;
+        clearFields: () => {
+            let fields, fieldsArray;
 
             fields = document.querySelectorAll(domStrings.inputDescription + ', ' + domStrings.inputValue);
             fieldsArray = Array.prototype.slice.call(fields);
 
-            fieldsArray.forEach(function(element) {
+            fieldsArray.forEach((element) => {
                 element.value = "";
             });
 
             fieldsArray[0].focus();
         },
 
-        updateUi: function(data) {
-            var type;
+        updateUi: (data) => {
+            let type;
             data.budget > 0 ? type = 'income' : type = 'expense'
 
             document.querySelector(domStrings.budgetTotal).textContent = formatNumber(data.budget, type);
@@ -266,12 +263,12 @@ var uiController = (function() {
             }
         },
 
-        changeType: function() {
-            var fields;
+        changeType: () => {
+            let fields;
 
             fields = document.querySelectorAll(domStrings.inputType + ',' + domStrings.inputDescription + ',' + domStrings.inputValue);
 
-            nodeListForEach(fields, function(element) {
+            nodeListForEach(fields, (element) => {
                 element.classList.toggle('red-focus');
             });
 
@@ -283,14 +280,14 @@ var uiController = (function() {
 })();
 
 
-var appController = (function(budgetCtrl, uiCtrl) {
+let appController = ((budgetCtrl, uiCtrl) => {
 
-    var initializeEventListeners = function() {
-        var domStrings = uiCtrl.getDomStrings();
+    let initializeEventListeners = () => {
+        let domStrings = uiCtrl.getDomStrings();
 
         document.querySelector(domStrings.inputBtn).addEventListener('click', ctrlAddItem);
 
-        document.addEventListener('keypress', function(e) {
+        document.addEventListener('keypress', (e) => {
             if (e.keyCode === 13 || event.which === 13) {
                 ctrlAddItem();
             }
@@ -300,28 +297,28 @@ var appController = (function(budgetCtrl, uiCtrl) {
         document.querySelector(domStrings.inputType).addEventListener('change', uiCtrl.changeType);
     };
 
-    var updateBudget = function() {
+    let updateBudget = () => {
         // Calculate budget
         budgetCtrl.calcBudget();
 
         // Return the budget
-        var budget = budgetCtrl.getBudget();
+        let budget = budgetCtrl.getBudget();
 
         // Display budget on UI
         uiCtrl.updateUi(budget);
     };
 
-    var updatePercentages = function() {
+    let updatePercentages = () => {
         // Calculate percentages
         budgetCtrl.calcPercentages();
         // Read from budget controller
-        var percentages = budgetCtrl.getPercentages();
+        let percentages = budgetCtrl.getPercentages();
         // Update UI with new percentages
         uiCtrl.displayPercentages(percentages);
     };
 
-    var ctrlAddItem = function() {
-        var input, newItem;
+    let ctrlAddItem = () => {
+        let input, newItem;
 
         // Get input data
         input = uiCtrl.getInput();
@@ -344,8 +341,8 @@ var appController = (function(budgetCtrl, uiCtrl) {
         }
     };
 
-    var ctrlDeleteItem = function(event) {
-        var itemID, splitID, type, ID;
+    let ctrlDeleteItem = (event) => {
+        let itemID, splitID, type, ID;
 
         itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
 
@@ -369,13 +366,11 @@ var appController = (function(budgetCtrl, uiCtrl) {
             // Update Percentages
             updatePercentages();
 
-        }
-
-        console.log(event.target)
+        };
     };
 
     return {
-        init: function() {
+        init: () => {
             initializeEventListeners();
             uiCtrl.displayDate();
             uiCtrl.updateUi({
