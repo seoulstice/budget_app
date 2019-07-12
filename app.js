@@ -40,9 +40,7 @@ let budgetController = (() => {
 
     let calcTotal = (type) => {
         let sum = 0;
-        data.allItems[type].forEach((element) => {
-            sum += element.value;
-        });
+        data.allItems[type].forEach(element => sum += element.value);
         data.total[type] = sum;
     };
 
@@ -74,9 +72,7 @@ let budgetController = (() => {
         deleteItem: (type, id) => {
             let ids, index;
 
-            ids = data.allItems[type].map((element) => {
-                return element.id;
-            });
+            ids = data.allItems[type].map(element => element.id);
 
             index = ids.indexOf(id);
 
@@ -102,15 +98,11 @@ let budgetController = (() => {
         },
 
         calcPercentages: () => {
-            data.allItems.expense.forEach((element) => {
-                element.calcPercentage(data.total.income);
-            });
+            data.allItems.expense.forEach(element => element.calcPercentage(data.total.income));
         },
 
         getPercentages: () => {
-            let allPercentages = data.allItems.expense.map((element) => {
-                return element.getPercentage();
-            });
+            let allPercentages = data.allItems.expense.map(element => element.getPercentage());
             return allPercentages;
         },
 
@@ -210,7 +202,7 @@ let uiController = (() => {
             element.parentNode.removeChild(element);
         },
 
-        displayPercentages: function(percentages) {
+        displayPercentages: (percentages) => {
             let fields = document.querySelectorAll(domStrings.expPercentage);
 
             nodeListForEach(fields, (current, index) => {
@@ -241,9 +233,7 @@ let uiController = (() => {
             fields = document.querySelectorAll(domStrings.inputDescription + ', ' + domStrings.inputValue);
             fieldsArray = Array.prototype.slice.call(fields);
 
-            fieldsArray.forEach((element) => {
-                element.value = "";
-            });
+            fieldsArray.forEach(element => element.value = "");
 
             fieldsArray[0].focus();
         },
@@ -268,9 +258,7 @@ let uiController = (() => {
 
             fields = document.querySelectorAll(domStrings.inputType + ',' + domStrings.inputDescription + ',' + domStrings.inputValue);
 
-            nodeListForEach(fields, (element) => {
-                element.classList.toggle('red-focus');
-            });
+            nodeListForEach(fields, (element) => element.classList.toggle('red-focus'));
 
             // need to change later to use with materialize icon document.querySelector(domStrings.inputBtn).classList.toggle('red');
 
