@@ -180,11 +180,11 @@ let uiController = (() => {
 
                 element = domStrings.incomeContainer;
 
-                html = '<div class="item" id="income-%id%"><div class="item-description">%description%</div><div class=""><div class="item__value">%value%</div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons">delete</i></button></div></div></div>'
+                html = '<div class="item" id="income-%id%"><div class="item-description">%description%</div><div class="item-right"><div class="item-value">%value%</div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons md-24">delete</i></button></div></div></div>'
             } else if (type === 'expense') {
                 element = domStrings.expensesContainer;
 
-                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class=""><div class="item-value">%value%</div><div class="item-percentage"> </div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons">delete</i></button></div></div></div>'
+                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class="item-right"><div class="item-value">%value%</div><div class="item-percentage"> </div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons">delete</i></button></div><div></div>'
             }
             // Replace the placeholder text with actual data
             newHtml = html.replace('%id%', obj.id);

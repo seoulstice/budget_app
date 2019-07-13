@@ -12,9 +12,7 @@ body {
   position: relative;
 }
 
-.bottom {
-    color: black;
-}
+.bottom { color: black }
 
 .clearfix::after {
     content: "";
@@ -22,17 +20,11 @@ body {
     clear: both;
 }
 
-.right {
-  float: right;
-}
+.right { float: right }
 
-.red {
-    color: red !imp
-}
+.red { color: red !important }
 
-.red-focus:focus {
-    border: 1px solid #d10808 !important;
-}
+.red-focus:focus { border: 1px solid #d10808 !important }
 
 
 .top {
@@ -80,9 +72,7 @@ body {
     background-color: #259c17;
 }
 
-.budget-expenses {
-    background-color: #d10808;
-}
+.budget-expenses { background-color: #d10808 }
 
 .budget-income-text,
 .budget-expenses-text {
@@ -120,3 +110,72 @@ body {
     outline: none;
     border: 1px solid #259c17;
 }
+
+/* Bottom */
+
+.container {
+    width: 1000px;
+    margin: 50px auto;
+
+}
+
+.income {
+    float: left;
+    width: 480px;
+}
+
+.income-title { color: #259c17 }
+
+.expenses-title { color: #d10808 }
+
+.income-title,
+.expenses-title { text-align:center }
+
+.expenses {
+    float: left;
+    width: 480px;
+    margin-left: 40px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    justify-content: space-between;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.item:first-child { border-top: 1px solid #c4c4c4 }
+
+.item:nth-child(even) { background-color: #ededed }
+
+.item-description { line-height: 40px }
+
+.item-value { transition: transform 0.5s }
+
+.item-right {
+    display: flex;
+    flex-direction: row;
+    line-height: 40px;
+    justify-content: space-around;
+}
+
+.item-delete { width: 40px }
+
+.item-delete-btn {
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    display: none;
+}
+
+.item-delete-btn:focus { outline: none; }
+.item-delete-btn:active { transform: translateY(2px) }
+
+.item:hover .item-delete-btn { display: block; }
+.item:hover .item-value { transform: translateX(-20px) }
+.item:hover .item-percentage { transform: translateX(-20px) }
