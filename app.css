@@ -92,6 +92,10 @@ body {
     float: left;
 }
 
+.budget-income-value {
+    margin-right: 44px;
+}
+
 .budget-income-percentage,
 .budget-expenses-percentage {
     float: left;
