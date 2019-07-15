@@ -1,5 +1,6 @@
 let budgetController = (() => {
 
+    // Expense Constructor
     let Expense = function(id, description, value) {
         this.id = id;
         this.description = description;
@@ -7,6 +8,7 @@ let budgetController = (() => {
         this.percentage = -1;
     };
 
+    // Expense constructor inheritance
     Expense.prototype.calcPercentage = function(totalIncome) {
         if (totalIncome > 0) {
             this.percentage = Math.round((this.value / totalIncome) * 100);
@@ -19,12 +21,14 @@ let budgetController = (() => {
         return this.percentage;
     }
 
+    // Income Constructor
     let Income = function(id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
     };
 
+    // Data object
     let data = {
         allItems: {
             expense: [],
@@ -38,13 +42,16 @@ let budgetController = (() => {
         percentage: -1
     };
 
+    // Sum of all items in type array
     let calcTotal = (type) => {
         let sum = 0;
         data.allItems[type].forEach(element => sum += element.value);
         data.total[type] = sum;
     };
 
+    // budgetController public methods
     return {
+        // Creates instance of Income/Expense and adds to allItems array
         addItem: (type, des, val) => {
             let newItem, ID;
 
@@ -69,6 +76,7 @@ let budgetController = (() => {
             return newItem;
         },
 
+        // Removes item from allItems array
         deleteItem: (type, id) => {
             let ids, index;
 
@@ -113,10 +121,6 @@ let budgetController = (() => {
                 budget: data.budget,
                 percentage: data.percentage
             }
-        },
-
-        testing: () => {
-            console.log(data);
         }
     }
 })();
@@ -180,11 +184,11 @@ let uiController = (() => {
 
                 element = domStrings.incomeContainer;
 
-                html = '<div class="item" id="income-%id%"><div class="item-description">%description%</div><div class="item-right"><div class="item-value">%value%</div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons md-24">delete</i></button></div></div></div>'
+                html = '<div class="item" id="income-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-delete"><button class="item-delete-btn"><i class="far fa-times-circle"></i></button></div></div></div>'
             } else if (type === 'expense') {
                 element = domStrings.expensesContainer;
 
-                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class="item-right"><div class="item-value">%value%</div><div class="item-percentage"> </div><div class="item-delete"><button class="item-delete-btn mdc-button"><i class="material-icons">delete</i></button></div><div></div>'
+                html = '<div class="item" id="expense-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item-value">%value%</div><div class="item-percentage"> </div><div class="item-delete"><button class="item-delete-btn"><i class="far fa-times-circle"></i></button></div><div></div>'
             }
             // Replace the placeholder text with actual data
             newHtml = html.replace('%id%', obj.id);
@@ -259,9 +263,6 @@ let uiController = (() => {
             fields = document.querySelectorAll(domStrings.inputType + ',' + domStrings.inputDescription + ',' + domStrings.inputValue);
 
             nodeListForEach(fields, (element) => element.classList.toggle('red-focus'));
-
-            // need to change later to use with materialize icon document.querySelector(domStrings.inputBtn).classList.toggle('red');
-
         }
     };
 

@@ -6,13 +6,12 @@
 }
 
 body {
-  color: white;
   font-family: 'Lato', sans-serif;
   height: 100vh;
   position: relative;
 }
 
-.bottom { color: black }
+.bottom { color: #000000 }
 
 .clearfix::after {
     content: "";
@@ -20,45 +19,50 @@ body {
     clear: both;
 }
 
-.right { float: right }
+.right {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .red { color: red !important }
 
-.red-focus:focus { border: 1px solid #d10808 !important }
+.red-focus:focus { border: 2px solid #D10808 !important }
 
 
 .top {
-  height: 40vh;
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  position: relative;
+    color: white;
+    height: 40vh;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
 /* Budget Area */
 
 .budget {
-  position: absolute;
-  width: 400px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
+    position: absolute;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
 
 }
 .budget-title {
-  font-size: 25px;
-  margin-bottom: 10px;
-  /* font-weight: 300; */
-  text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .budget-total {
-  font-weight: 300;
-  font-size: 46px;
-  text-align: center;
-  margin-bottom: 25px;
-  letter-spacing: 2px;
+    font-weight: 300;
+    font-size: 46px;
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
 }
 
 .budget-income,
@@ -69,10 +73,10 @@ body {
 
 .budget-income {
     margin-bottom: 10px;
-    background-color: #259c17;
+    background-color: #259C17;
 }
 
-.budget-expenses { background-color: #d10808 }
+.budget-expenses { background-color: #D10808 }
 
 .budget-income-text,
 .budget-expenses-text {
@@ -108,7 +112,7 @@ body {
 .add-description:focus,
 .add-value:focus {
     outline: none;
-    border: 1px solid #259c17;
+    border: 2px solid #259C17;
 }
 
 /* Bottom */
@@ -119,63 +123,111 @@ body {
 
 }
 
-.income {
-    float: left;
-    width: 480px;
+.budget-form-container {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  #CCCCCC;
 }
 
-.income-title { color: #259c17 }
+.budget-form {
+    display: flex;
+    align-items: center;
+}
 
-.expenses-title { color: #d10808 }
+.dropdown {
+    width: 60px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.add-description,
+.add-value {
+    border:none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 10px;
+    height: 28px;
+    padding-left: 10px;
+}
+
+.add-btn {
+    font-size: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    width: 30px;
+}
+
+.add-btn:active { transform: translateY(2px) }
+.add-btn:focus { outline: none }
 
 .income-title,
 .expenses-title { text-align:center }
 
+.income-title { color: #259C17 }
+
+.income {
+    color: #000000;
+    float: left;
+    width: 480px;
+    margin-right: 40px;
+}
+
+.expenses-title { color: #D10808 }
+
 .expenses {
     float: left;
     width: 480px;
-    margin-left: 40px;
 }
+
+.item:first-child { border-top: 1px solid #C4C4C4 }
+
+.item:nth-child(even) { background-color: #EDEDED }
 
 .item {
+    color: #000000;
     display: flex;
     flex-direction: row;
-    height: 40px;
     justify-content: space-between;
-    border-bottom: 1px solid #c4c4c4;
-}
-
-.item:first-child { border-top: 1px solid #c4c4c4 }
-
-.item:nth-child(even) { background-color: #ededed }
-
-.item-description { line-height: 40px }
-
-.item-value { transition: transform 0.5s }
-
-.item-right {
-    display: flex;
-    flex-direction: row;
+    font-size: 20px;
     line-height: 40px;
-    justify-content: space-around;
 }
 
-.item-delete { width: 40px }
+.item-value,
+.item-percentage {
+    transition: transform 0.4s;
+}
+
+.item-percentage {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #D10808;
+    border-radius: 3px;
+    text-align: center;
+    float: left;
+}
 
 .item-delete-btn {
-    font-size: 22px;
-    background: none;
+    font-size: 20px;
+    padding: 0;
     border: none;
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1;
+    background: none;
+    color: #D10808;
+}
+
+.item-delete {
+    display:flex;
+    justify-content: space-around;
     display: none;
 }
 
-.item-delete-btn:focus { outline: none; }
+.item-delete-btn:focus { outline: none }
 .item-delete-btn:active { transform: translateY(2px) }
 
-.item:hover .item-delete-btn { display: block; }
-.item:hover .item-value { transform: translateX(-20px) }
-.item:hover .item-percentage { transform: translateX(-20px) }
+.item:hover .item-delete { display: block; }
+.item:hover .item-value { transform: translateX(-10px) }
+.item:hover .item-percentage { transform: translateX(-10px) }
